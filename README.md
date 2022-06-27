@@ -9,7 +9,7 @@ WinTile also supports:
 
 WinTile can be found on the GNOME Extension site:
 
-https://extensions.gnome.org/extension/1723/wintile-windows-10-window-tiling-for-gnome/
+https://extensions.gnome.org/extension/5170/wintile-reloaded-windows-10-window-tiling-for-gnom/
 
 <img src='demo.gif'>
 
