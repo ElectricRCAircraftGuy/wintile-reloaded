@@ -95,14 +95,17 @@ function requestMinimize(app) {
 }
 
 // Move window to specified location and size.
-// On paper, the move_resize_frame should not need the preceding move_frame, 
-// but the additional move_frame is known to fix errors with gnome-terminal 
+// On paper, the move_resize_frame should not need the preceding move_frame,
+// but the additional move_frame is known to fix errors with gnome-terminal
 // and [gnome-]terminator.
 // A similar fix is used in the gTile extension:
 // See https://github.com/gTile/gTile/commit/fc68797015e13143f74606fcbb9d48859f55dca9 by jshack88.
 function moveAppCoordinates(app, x, y, w, h) {
 	_log("Moving window to ("+x+","+y+"), size ("+w+","+h+")" );
 	app.move_frame(true, x, y);
+	app.move_resize_frame(true, x, y, w, h);
+	// as of stupid as it sounds this fixes an issue with mutter 41.3
+	// https://gitlab.gnome.org/GNOME/mutter/-/issues/2091
 	app.move_resize_frame(true, x, y, w, h);
 }
 
@@ -172,7 +175,7 @@ function initApp(app, maximized=false) {
 			col: -1,
 			height: -1,
 			width: -1
-		};	
+		};
 	} else {
 		_log('init as maximize')
 		app.wintile = {
@@ -181,7 +184,7 @@ function initApp(app, maximized=false) {
 			col: 0,
 			height: 2,
 			width: config.cols
-		};	
+		};
 	}
 }
 
@@ -281,7 +284,7 @@ function sendMove(direction) {
 					// Minimize
 					requestMinimize(app);
 					break;
-			}	
+			}
 		} else if (config.cols == 3) {
 				// Ultrawide 3x2 grid
 				switch (direction) {
@@ -327,7 +330,7 @@ function sendMove(direction) {
 					// Minimize
 					requestMinimize(app);
 					break;
-			}	
+			}
 		}
 	} else {
 		// We are already in a tile.
@@ -432,7 +435,7 @@ function sendMove(direction) {
 						requestMinimize(app);
 					}
 					break;
-			}	
+			}
 		} else if (config.cols == 3) {
 			// Ultrawide 3x2 grid
 			switch (direction) {
@@ -517,14 +520,14 @@ function sendMove(direction) {
 					} else if (app.wintile.width != 3) {
 						// We are not full bottom but are a tile, go full width
 						_log('down - 5')
-						moveApp(app, { "row": 1, "col": 0, "height": 1, "width": 3 });					
+						moveApp(app, { "row": 1, "col": 0, "height": 1, "width": 3 });
 					} else {
 						// We are bottom half, minimize
 						_log('down - 6')
 						requestMinimize(app);
 					}
 					break;
-			}	
+			}
 		} else {
 			// Ultrawide 4x2 grid
 			switch (direction) {
@@ -617,14 +620,14 @@ function sendMove(direction) {
 					} else if (app.wintile.width != 4) {
 						// We are not full bottom but are a tile, go full width
 						_log('down - 6')
-						moveApp(app, { "row": 1, "col": 0, "height": 1, "width": 4 });					
+						moveApp(app, { "row": 1, "col": 0, "height": 1, "width": 4 });
 					} else {
 						// We are bottom half, minimize
 						_log('down - 7')
 						requestMinimize(app);
 					}
 					break;
-			}	
+			}
 		}
 	}
 }
@@ -663,8 +666,8 @@ function windowGrabBegin(meta_window, meta_grab_op) {
 			app.origFrameRect = app.get_frame_rect();
 			Mainloop.timeout_add(config.preview.delay, function () {
 				checkIfNearGrid(app);
-			});	
-		}	
+			});
+		}
 	}
 }
 
@@ -686,9 +689,9 @@ function windowGrabEnd(meta_window, meta_grab_op) {
 					if (app.maximized_horizontally && app.maximized_vertically) {
 						initApp(app, true)
 					}
-				});	
+				});
 			}
-		}	
+		}
 	}
 }
 
@@ -895,14 +898,14 @@ var enable = function() {
 		// Since GNOME 40 the meta_display argument isn't passed anymore to these callbacks.
 		// We "translate" the parameters here so that things work on both GNOME 3 and 40.
 		onWindowGrabBegin = global.display.connect('grab-op-begin', (meta_display, meta_screen, meta_window, meta_grab_op, gpointer) => {
-			if (SHELL_VERSION_MAJOR >= 40) { 
+			if (SHELL_VERSION_MAJOR >= 40) {
 				windowGrabBegin(meta_screen, meta_window);
 			} else {
 				windowGrabBegin(meta_window, meta_grab_op);
 			}
 		});
 		onWindowGrabEnd = global.display.connect('grab-op-end', (meta_display, meta_screen, meta_window, meta_grab_op, gpointer) => {
-			if (SHELL_VERSION_MAJOR >= 40) { 
+			if (SHELL_VERSION_MAJOR >= 40) {
 				windowGrabEnd(meta_screen, meta_window);
 			} else {
 				windowGrabEnd(meta_window, meta_grab_op);
