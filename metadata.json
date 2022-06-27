@@ -1,8 +1,8 @@
 {
-	"name": "WinTile: Windows 10 window tiling for GNOME",
-	"description": "WinTile is a hotkey driven window tiling system for GNOME that imitates the standard Win-Arrow keys of Windows 10, allowing you to maximize, maximize to sides, or 1/4 sized to corner across a single or multiple monitors using just Super+Arrow.\n\nAs of v3, WinTile also supports:\n- 2, 3, or 4 columns for standard or ultrawide monitors\n- Top/bottom half support\n- Mouse preview and snapping for placing windows\n- Toggling of 'maximize' mode, which adds/removes GNOME animations",
-	"uuid": "wintile@nowsci.com",
-	"url": "https://github.com/fmstrat/wintile",
+	"name": "WinTile RELOADED: Windows 10 window tiling for GNOME",
+	"description": "WinTile is a hotkey driven window tiling system for GNOME that imitates the standard Win-Arrow keys of Windows 10, allowing you to maximize, maximize to sides, or 1/4 sized to corner across a single or multiple monitors using just Super+Arrow.\n\nAs of v3, WinTile also supports:\n- 2, 3, or 4 columns for standard or ultrawide monitors\n- Top/bottom half support\n- Mouse preview and snapping for placing windows\n- Toggling of 'maximize' mode, which adds/removes GNOME animations\n\nThis is a fork to update this project which has not been updated for a long time.",
+	"uuid": "wintile@jaajeur.xyz",
+	"url": "https://github.com/Captn138/wintile-reloaded",
 	"shell-version": [
 		"3.28",
 		"3.30",
@@ -14,5 +14,5 @@
 		"41",
 		"42"
 	],
-	"version": 7
+	"version": 8
 }
