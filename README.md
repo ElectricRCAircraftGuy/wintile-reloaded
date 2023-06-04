@@ -15,7 +15,7 @@ And apparently tag `v10.1` on branch `master` [is actually the `v11` WIP?](https
 
 ---
 
-# DO NOT CONTRIBUTE TO THIS REPO, nor open issues on it! Go help fix [WinTile](https://github.com/Fmstrat/wintile) instead.
+# DO NOT CONTRIBUTE TO THIS REPO, nor open issues on it (except for conversation purposes perhaps)! Go help fix [WinTile](https://github.com/Fmstrat/wintile) instead.
 
 This is just a quick hack fix to get myself unblocked with a functional Window snapping tool in Ubuntu 22.04 again. See my notes above.
 
